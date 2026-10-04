@@ -1,0 +1,42 @@
+name: "CWV: Monthly deep review"
+description: "Run the Phase 3 monthly checklist for a client."
+title: "CWV Monthly: <client> — <YYYY-MM>"
+labels: ["cwv", "monthly"]
+body:
+  - type: input
+    id: client
+    attributes:
+      label: Client
+      placeholder: "Client name"
+    validations:
+      required: true
+
+  - type: input
+    id: month
+    attributes:
+      label: Month
+      placeholder: "YYYY-MM"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Phase 3 — Monthly Deep Review
+      options:
+        - label: "Run full-site audit — Test all monitored pages, not just the key ones. Look for pages that may have degraded without triggering alerts"
+        - label: "Compare month-over-month trends — Are scores improving, stable, or declining? Identify patterns"
+        - label: "Review performance budget targets — Are your budgets still appropriate? Should they be tightened (stretch goals) or adjusted?"
+        - label: "Audit new pages — Has the client added new landing pages, blog posts, or product pages? Add them to monitoring"
+        - label: "Re-audit third-party scripts — New scripts get added all the time (marketing tags, A/B testing, chat widgets). Check for new render-blocking resources"
+        - label: "Check Google Search Console CWV report — Compare field data trends with your lab monitoring data. Are they aligned?"
+        - label: "Generate client performance report — Create a summary showing current scores, trends, issues fixed, and recommendations"
+        - label: "Review and optimize alert configuration — Are you getting too many alerts (fatigue) or too few (blind spots)? Adjust thresholds and cooldowns"
+
+  - type: textarea
+    id: report_summary
+    attributes:
+      label: Client report summary (paste bullet points or a short narrative)
+      placeholder: "Current scores, trends, issues fixed, recommendations…"
+    validations:
+      required: false

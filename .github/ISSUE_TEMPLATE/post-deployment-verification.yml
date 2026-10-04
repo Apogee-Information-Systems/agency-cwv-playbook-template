@@ -1,0 +1,43 @@
+name: "CWV: Post-deployment verification"
+description: "Run the Phase 5 checklist within 24h of deployment."
+title: "CWV Post-Deploy: <client> — <release/ref>"
+labels: ["cwv", "deploy", "post-deploy"]
+body:
+  - type: input
+    id: client
+    attributes:
+      label: Client
+      placeholder: "Client name"
+    validations:
+      required: true
+
+  - type: input
+    id: release
+    attributes:
+      label: Release / reference
+      placeholder: "v1.2.0 / commit SHA / ticket link"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Phase 5 — Post-Deployment Verification
+      options:
+        - label: "Run immediate tests — Test all key pages on both mobile and desktop within 1 hour of deployment"
+        - label: "Compare against pre-deployment baseline — Look for any metric regressions"
+        - label: "Check CLS specifically — Deployments often introduce layout shifts through new elements, changed styles, or updated fonts"
+        - label: "Verify LCP element — Has the LCP element changed? A new hero section or image could alter LCP behavior"
+        - label: "Monitor for 48 hours — Some issues only appear under real traffic. Keep monitoring closely for 2 days after deployment"
+        - label: "Notify the client — Report on whether the deployment maintained, improved, or degraded performance"
+
+  - type: textarea
+    id: regressions
+    attributes:
+      label: Regressions / incidents
+      placeholder: |
+        - Score dropped below 50? (incident)
+        - LCP > 5s? (urgent)
+        - Multiple pages regressed at once? (site-wide change)
+    validations:
+      required: false

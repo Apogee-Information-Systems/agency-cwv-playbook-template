@@ -1,0 +1,42 @@
+name: "CWV: Pre-deployment checks"
+description: "Run the Phase 4 checklist before a major change goes live."
+title: "CWV Pre-Deploy: <client> — <release/ref>"
+labels: ["cwv", "deploy", "pre-deploy"]
+body:
+  - type: input
+    id: client
+    attributes:
+      label: Client
+      placeholder: "Client name"
+    validations:
+      required: true
+
+  - type: input
+    id: release
+    attributes:
+      label: Release / reference
+      placeholder: "v1.2.0 / commit SHA / ticket link"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Phase 4 — Pre-Deployment Checks
+      options:
+        - label: "Baseline current scores — Record current CWV metrics for all key pages before the deployment"
+        - label: "Test staging environment — If available, run PageSpeed tests on the staging site to catch issues before production"
+        - label: "Check for new render-blocking resources — Is the deployment adding new CSS/JS files? Are they deferred?"
+        - label: "Verify image optimization — Any new images should be compressed, properly sized, and have dimensions set"
+        - label: "Test critical interactions — For INP: test key interactions (form submissions, menu toggles, search) on the staging site"
+        - label: "Plan post-deployment monitoring — Schedule immediate post-deploy tests to catch any regressions quickly"
+
+  - type: textarea
+    id: staging_urls
+    attributes:
+      label: Staging URLs tested (if applicable)
+      placeholder: |
+        - https://staging.example.com/
+        - https://staging.example.com/pricing
+    validations:
+      required: false

@@ -1,0 +1,44 @@
+name: "CWV: Weekly monitoring"
+description: "Run the Phase 2 weekly checklist for a client."
+title: "CWV Weekly: <client> — Week of <YYYY-MM-DD>"
+labels: ["cwv", "weekly"]
+body:
+  - type: input
+    id: client
+    attributes:
+      label: Client
+      placeholder: "Client name"
+    validations:
+      required: true
+
+  - type: input
+    id: week_of
+    attributes:
+      label: Week of
+      placeholder: "YYYY-MM-DD"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Phase 2 — Weekly Monitoring Routine
+      options:
+        - label: "Review automated test results — Check the latest scores for all monitored pages. Look for any scores that have dropped since last week"
+        - label: "Check for new alerts — Review any budget violation alerts that fired during the week"
+        - label: "Verify resolved alerts — Confirm that previously flagged issues have been fixed and metrics are back within budget"
+        - label: "Spot-check mobile scores — Mobile performance typically lags desktop. Pay extra attention to mobile LCP and INP"
+        - label: "Review CLS for content-heavy pages — Pages with dynamic content, ads, or frequently updated elements are CLS hotspots"
+        - label: "Check API usage — If you're on a quota-limited plan, verify you're not approaching your monthly test limit"
+        - label: "Note any site changes — Were there any deployments, content updates, or plugin changes this week? Correlate with any score changes"
+        - label: "Update the client if needed — Flag any significant regressions or improvements to the client"
+
+  - type: textarea
+    id: deltas
+    attributes:
+      label: Notable changes (regressions / improvements)
+      placeholder: |
+        - Homepage LCP mobile: 2.3s -> 3.1s (regression)
+        - Pricing INP mobile: 180ms -> 130ms (improvement)
+    validations:
+      required: false
